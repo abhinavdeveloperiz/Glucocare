@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlucoCare Sugar Clinic</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        glucoblue: "#1e4d8b",
+                        glucogreen: "#1abc9c"
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        * {
+            font-family: "Inter", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-heading {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #67a9ff 0%, #1abc9c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: #1abc9c;
+            font-weight: 600;
+        }
+
+        .fixed-bg {
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .fixed-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+        }
+
+        .fixed-bg>* {
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1e4d8b 0%, #1abc9c 100%);
+            transform: transition;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(30, 77, 139, 0.3);
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(26, 188, 156, 0.2);
+        }
+
+        .testimonial-card {
+            border-left: 5px solid #1abc9c;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1e4d8b 0%, #1abc9c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Mobile Menu Toggle Animation */
+        #mobile-menu-btn.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        #mobile-menu-btn.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        #mobile-menu-btn.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(10px, -10px);
+        }
+    </style>
+
+</head>
+
+<body class="bg-white text-gray-700">
+
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white shadow-md transition">
+        <div class="w-full px-4 md:px-8 py-3 md:py-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+                <!-- Logo (Left) -->
+                <div class="flex-shrink-0">
+                    <img src="/static/images/logo.png" class="h-8 md:h-10 w-auto" alt="GlucoCare logo" />
+                </div>
+
+                <!-- Desktop Menu (Center) -->
+                <div class="hidden lg:flex flex-1 justify-center items-center gap-1 xl:gap-2">
+                    <a href="#home"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-home mr-1.5"></i><span class="hidden xl:inline">Home</span>
+                    </a>
+                    <a href="#about"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-info-circle mr-1.5"></i><span class="hidden xl:inline">About</span>
+                    </a>
+                    <a href="#why"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-lightbulb mr-1.5"></i><span class="hidden xl:inline">Why Us</span>
+                    </a>
+                    <a href="#services"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-heartbeat mr-1.5"></i><span class="hidden xl:inline">Services</span>
+                    </a>
+                    <a href="#technology"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-brain mr-1.5"></i><span class="hidden xl:inline">Technology</span>
+                    </a>
+                    <a href="#testimonials"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-star mr-1.5"></i><span class="hidden xl:inline">Testimonials</span>
+                    </a>
+                    <a href="#contact"
+                        class="px-3 py-2 text-glucoblue text-sm xl:text-base font-semibold hover:text-glucogreen hover:bg-glucogreen/5 rounded-lg transition duration-300">
+                        <i class="fa fa-envelope mr-1.5"></i><span class="hidden xl:inline">Contact</span>
+                    </a>
+                </div>
+
+                <!-- Book Now Button (Desktop) & Mobile Menu Toggle -->
+                <div class="flex items-center gap-2 md:gap-3 ml-auto">
+                    <button
+                        class="hidden lg:block px-5 md:px-6 py-2 md:py-2.5 bg-glucogreen text-white rounded-full text-sm font-bold shadow hover:shadow-lg hover:bg-glucogreen/90 transition duration-300">
+                        Book Now
+                    </button>
+
+                    <!-- Mobile Menu Toggle (Hamburger) -->
+                    <button id="mobile-menu-btn"
+                        class="lg:hidden flex flex-col justify-center items-center w-10 h-10 relative group">
+                        <span class="hamburger-line w-6 h-0.5 bg-glucoblue absolute transition-all duration-300"
+                            style="top: 8px;"></span>
+                        <span class="hamburger-line w-6 h-0.5 bg-glucoblue absolute transition-all duration-300"
+                            style="top: 18px;"></span>
+                        <span class="hamburger-line w-6 h-0.5 bg-glucoblue absolute transition-all duration-300"
+                            style="top: 28px;"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Full Width Dropdown) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden absolute top-full left-0 right-0 bg-white border-t-2 border-glucogreen shadow-xl max-h-96 overflow-y-auto">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#home"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-home mr-3"></i>Home
+                </a>
+                <a href="#about"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-info-circle mr-3"></i>About
+                </a>
+                <a href="#why"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-lightbulb mr-3"></i>Why Us
+                </a>
+                <a href="#services"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-heartbeat mr-3"></i>Services
+                </a>
+                <a href="#technology"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-brain mr-3"></i>Technology
+                </a>
+                <a href="#testimonials"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-star mr-3"></i>Testimonials
+                </a>
+                <a href="#contact"
+                    class="block px-4 py-3 text-glucoblue text-sm font-semibold hover:text-glucogreen hover:bg-glucogreen/10 rounded-lg transition duration-300">
+                    <i class="fa fa-envelope mr-3"></i>Contact
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- HERO SECTION -->
+    <section id="home"
+        class="pt-20 md:pt-24 pb-16 md:pb-24 px-4 md:px-6 flex items-center justify-center bg-gradient-to-br from-blue-400 via-white to-glucogreen min-h-screen md:min-h-screen">
+        <div class="max-w-7xl w-full mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <!-- Text Content -->
+                <div class="text-center md:text-left order-2 md:order-1">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 md:mb-6">
+                        <span class="text-glucoblue">HAPPINESS IN LIFE</span><br>
+                        <span class="text-glucogreen">IS A CHOICE</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg md:text-xl font-semibold mb-6 md:mb-8 text-gray-700">
+                        RE-ENGINEERING METABOLISM<br class="hidden sm:block"> • REDEFINING HEALTHCARE
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+                        <button
+                            class="bg-glucogreen text-white px-6 md:px-8 py-3 rounded-full shadow-lg text-base md:text-lg font-bold hover:shadow-xl transition order-1">
+                            Book Consultation
+                        </button>
+                        <button
+                            class="bg-glucoblue text-white px-6 md:px-8 py-3 rounded-full shadow-lg text-base md:text-lg font-bold hover:shadow-xl transition border border-glucoblue order-2">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-6">
+                        <div>
+                            <p class="text-2xl md:text-3xl font-bold text-glucogreen">100+</p>
+                            <p class="text-xs md:text-sm text-gray-600">Happy Patients</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl md:text-3xl font-bold text-glucoblue">24/7</p>
+                            <p class="text-xs md:text-sm text-gray-600">Support</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl md:text-3xl font-bold text-glucogreen">50%+</p>
+                            <p class="text-xs md:text-sm text-gray-600">Remission Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Content -->
+                <div class="order-1 md:order-2">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-glucogreen to-glucoblue rounded-2xl blur-2xl opacity-30">
+                        </div>
+                        <img src="https://gov-web-sing.s3.ap-southeast-1.amazonaws.com/uploads/2023/1/Wordpress-featured-images-48-1672795987342.jpg"
+                            alt="Healthcare Professional"
+                            class="relative rounded-2xl shadow-2xl w-full h-[300px] md:h-[500px] object-cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-16 md:py-24 px-4 md:px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase font-bold">
+                    <span class="text-glucoblue">About</span>
+                    <span class="text-glucogreen">GlucoCare</span>
+                </h2>
+
+                <p class="mt-3 md:mt-4 text-base md:text-lg text-gray-600 max-w-3xl mx-auto px-4">
+                    GlucoCare is pioneering a doctor-centered model of care for metabolic health, delivering a
+                    multi-specialty hospital experience through telemedicine with unmatched clinical oversight.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-glucoblue mb-4 md:mb-6">Our Mission</h3>
+                    <p class="text-gray-700 mb-3 md:mb-4 text-base md:text-lg leading-relaxed text-justify">
+                        To turn real-time metabolic data into actionable clinical intelligence — enabling doctors and
+                        individuals to reverse diabetes sustainably.
+                    </p>
+                    <p class="text-gray-700 mb-4 md:mb-6 text-base md:text-lg leading-relaxed text-justify">
+                        We combine diabetes remission, metabolic restoration, and cardiac protection delivered with
+                        scientific precision and human warmth through the synergy of our Metabolomist, Endocrinologist,
+                        and Cardiologist.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-glucogreen text-xl md:text-2xl"></i>
+                            <span class="text-gray-700 font-semibold text-sm md:text-base">Science-Backed</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-glucogreen text-xl md:text-2xl"></i>
+                            <span class="text-gray-700 font-semibold text-sm md:text-base">Doctor-Led</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-glucogreen mb-4 md:mb-6">Our Vision</h3>
+                    <p class="text-gray-700 mb-4 md:mb-6 text-base md:text-lg leading-relaxed">
+                        To build a future where Type 2 Diabetes is no longer a life sentence, but a preventable and
+                        manageable condition accessible to all.
+                    </p>
+                    <div class="bg-glucoblue/10 p-6 md:p-8 rounded-xl border-l-4 border-glucogreen">
+                        <p class="text-gray-800 font-semibold italic text-sm md:text-base">
+                            "The global truth is simple: We don't have a treatment problem. We have a detection and
+                            personalization problem."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY GLUCOCARE SECTION -->
+    <section id="why" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase">
+                    <span class="text-glucoblue">Why</span>
+                    <span class="text-glucogreen">GlucoCare?</span>
+                </h2>
+
+                <p class="mt-4 text-lg text-gray-600">Understanding the metabolic crisis</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="stat-card p-8 rounded-2xl shadow-lg text-white">
+                    <i class="fas fa-exclamation-circle text-4xl mb-4"></i>
+                    <h3 class="text-5xl font-bold mb-2">1 in 3</h3>
+                    <p class="text-lg">Adults have metabolic risk</p>
+                </div>
+
+                <div class="stat-card p-8 rounded-2xl shadow-lg text-white">
+                    <i class="fas fa-chart-line text-4xl mb-4"></i>
+                    <h3 class="text-5xl font-bold mb-2">40%+</h3>
+                    <p class="text-lg">Prediabetic and unaware</p>
+                </div>
+
+                <div class="stat-card p-8 rounded-2xl shadow-lg text-white">
+                    <i class="fas fa-rupiah text-4xl mb-4"></i>
+                    <h3 class="text-5xl font-bold mb-2">10X</h3>
+                    <p class="text-lg">Higher cost treating complications</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl border-2 border-glucogreen">
+                <div class="flex gap-6 items-start">
+                    <i class="fas fa-lightbulb text-glucogreen text-4xl flex-shrink-0 mt-2"></i>
+                    <div>
+                        <h4 class="text-2xl font-bold text-glucoblue mb-4">Every 10 Seconds...</h4>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Someone loses a limb, a kidney, eyesight, or life to diabetes. Not because treatments don't
+                            exist, but because current systems react too late. GlucoCare is changing this narrative with
+                            early detection and personalized intervention.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-24 fixed-bg"
+        style="background-image: url('https://plus.unsplash.com/premium_photo-1661410991860-4cd86e2613e7?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMHRlc3R8ZW58MHx8MHx8fDA%3D');">
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-3 uppercase">
+                    <span class="text-glucoblue">Our</span>
+                    <span class="text-glucogreen">Services</span>
+                </h2>
+
+                <p class="text-xl text-white/90">Drug-free metabolic restoration programs</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card bg-white p-8 rounded-2xl shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucogreen to-glucoblue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heart text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-glucoblue text-center mb-3">Type 2 Diabetes</h3>
+                    <p class="text-gray-600 text-center mb-4">Science-backed remission programs with proven outcomes.
+                    </p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Personalized protocols</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Continuous monitoring</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Expert guidance</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-white p-8 rounded-2xl shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucoblue to-glucogreen w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-glucoblue text-center mb-3">Prediabetes</h3>
+                    <p class="text-gray-600 text-center mb-4">Early intervention to prevent progression and reverse
+                        damage.</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Early detection</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Prevention focus</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Lifestyle coaching</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-white p-8 rounded-2xl shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucogreen to-glucoblue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-balance-scale text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-glucoblue text-center mb-3">Obesity</h3>
+                    <p class="text-gray-600 text-center mb-4">Restore metabolic balance and achieve sustainable weight
+                        loss.</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Metabolic analysis</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Nutrition planning</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-glucogreen"></i> Progress tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGY SECTION -->
+    <section id="technology" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase">
+                    <span class="text-glucoblue">Our</span>
+                    <span class="text-glucogreen">Technology</span>
+                </h2>
+
+                <p class="mt-4 text-lg text-gray-600">Clinical innovation powered by precision data</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-3xl font-bold text-glucoblue mb-8">150+ Data Points Daily</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div
+                                class="bg-glucogreen text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-wave-square"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-glucoblue mb-1">Continuous Glucose Monitoring</h4>
+                                <p class="text-gray-600">Real-time glucose levels and patterns</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="bg-glucogreen text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-glucoblue mb-1">Wearable Sensors</h4>
+                                <p class="text-gray-600">Heart rate, sleep, and activity tracking</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="bg-glucogreen text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-glucoblue mb-1">Blood Pressure Monitor</h4>
+                                <p class="text-gray-600">Cardiovascular health monitoring</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="bg-glucogreen text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-weight"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-glucoblue mb-1">Body Composition Analysis</h4>
+                                <p class="text-gray-600">Muscle and fat mass tracking</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="bg-glucoblue/5 p-8 rounded-2xl border-2 border-glucogreen">
+                    <h4 class="text-2xl font-bold text-glucoblue mb-6">Proprietary Clinical Engine</h4>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h5 class="font-bold text-glucogreen mb-2 flex items-center gap-2">
+                                <i class="fas fa-target"></i> Preventera Remission Score
+                            </h5>
+                            <p class="text-gray-700">Predicts remission potential using multi-parametric modeling</p>
+                        </div>
+
+                        <div>
+                            <h5 class="font-bold text-glucogreen mb-2 flex items-center gap-2">
+                                <i class="fas fa-cube"></i> Metabolic Twin Prototype
+                            </h5>
+                            <p class="text-gray-700">Visualizes organ-level metabolic state (beta)</p>
+                        </div>
+
+                        <div>
+                            <h5 class="font-bold text-glucogreen mb-2 flex items-center gap-2">
+                                <i class="fas fa-chart-area"></i> Clinician Dashboard
+                            </h5>
+                            <p class="text-gray-700">Integrates CGM, labs, phenotype markers, and clinical guidelines
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-glucoblue to-glucogreen p-1 rounded-2xl">
+                <div class="bg-white p-8 rounded-2xl">
+                    <h4 class="text-2xl font-bold text-glucoblue mb-4">Built on Proven Science</h4>
+                    <p class="text-gray-700 mb-4">
+                        Our programs are validated by landmark clinical trials including Counterpoint, Counterbalance,
+                        DiRECT, and DIADEM-I, which have established that Type 2 Diabetes remission is physiologically
+                        achievable.
+                    </p>
+                    <p class="text-gray-700">
+                        With 100+ patients across India and GCC in our early pipeline, we've demonstrated positive
+                        clinical signals in CGM variability, fasting glucose, weight trends, and patient adherence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section id="team" class="py-24 fixed-bg"
+        style="background-image: url('https://img.freepik.com/free-vector/modern-abstract-white-minimal-background_84443-8353.jpg?semt=ais_se_enriched&w=740&q=80');">
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-3 uppercase">
+                    <span class="text-glucoblue">Clinical</span>
+                    <span class="text-glucogreen">Expertise</span>
+                </h2>
+
+                <p class="text-xl text-white/90">Multi-specialty supervision advantage</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucogreen to-glucoblue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-flask text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Metabolomist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Metabolic pathway analysis</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucoblue to-glucogreen w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Cardiologist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Cardiac protection</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucogreen to-glucoblue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-microscope text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Endocrinologist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Hormone regulation</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucoblue to-glucogreen w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-apple-alt text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Nutritionist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Dietary planning</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucogreen to-glucoblue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-eye text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Retina Specialist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Eye health monitoring</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucoblue to-glucogreen w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-brain text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Psychologist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Mental wellness</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucogreen to-glucoblue w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-x-ray text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Radiologist</h4>
+                    <p class="text-sm text-gray-600 mt-2">Imaging analysis</p>
+                </div>
+
+                <div class="bg-white/95 p-6 rounded-xl text-center shadow-lg">
+                    <div
+                        class="bg-gradient-to-br from-glucoblue to-glucogreen w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comments text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-glucoblue">Care Coordinator</h4>
+                    <p class="text-sm text-gray-600 mt-2">Patient support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase">
+                    <span class="text-glucoblue">Our</span>
+                    <span class="text-glucogreen">Clinic</span>
+                </h2>
+
+                <p class="mt-4 text-lg text-gray-600">State-of-the-art facilities and compassionate care</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="rounded-xl shadow-lg overflow-hidden h-72 group cursor-pointer">
+                    <img src="https://png.pngtree.com/thumb_back/fh260/background/20240426/pngtree-a-doctor-examining-patient-vital-signs-in-medical-office-image_15672199.jpg"
+                        class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+
+                <div class="rounded-xl shadow-lg overflow-hidden h-72 group cursor-pointer">
+                    <img src="https://png.pngtree.com/thumb_back/fh260/background/20240522/pngtree-a-professional-doctor-in-a-medical-gown-holds-a-stethoscope-image_15677379.jpg"
+                        class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+
+                <div class="rounded-xl shadow-lg overflow-hidden h-72 group cursor-pointer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUOWmfWuOZbcsQ-GONIKzwWGAwMffq09_1uQ&s"
+                        class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+
+                <div class="rounded-xl shadow-lg overflow-hidden h-72 group cursor-pointer">
+                    <img src="https://thumbs.dreamstime.com/b/mature-doctor-prescribes-medical-exam-17099840.jpg"
+                        class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+
+                <div class="rounded-xl shadow-lg overflow-hidden h-72 group cursor-pointer">
+                    <img src="https://images.pexels.com/photos/6129119/pexels-photo-6129119.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+
+                <div class="rounded-xl shadow-lg overflow-hidden h-72 group cursor-pointer">
+                    <img src="https://wallpapers.com/images/hd/doctor-with-globe-in-hand-hd-medical-dff7ahiwc5xsfjm0.jpg"
+                        class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase">
+                    <span class="text-glucoblue">Patient</span>
+                    <span class="text-glucogreen">Stories</span>
+                </h2>
+
+                <p class="mt-4 text-lg text-gray-600">Real transformations, real results</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-glucogreen rounded-full flex items-center justify-center text-white font-bold">
+                            SK
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-glucoblue">Sameer K.</h4>
+                            <p class="text-sm text-gray-600">Type 2 Diabetes</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-3">
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "In just 6 months, my blood sugar normalized without any medication. The personalized approach
+                        and constant monitoring made all the difference. I feel like a new person!"
+                    </p>
+                </div>
+
+                <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-glucogreen rounded-full flex items-center justify-center text-white font-bold">
+                            RJ
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-glucoblue">Rajesh J.</h4>
+                            <p class="text-sm text-gray-600">Prediabetes</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-3">
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "Caught my prediabetes early thanks to GlucoCare. Their lifestyle coaching and real-time
+                        feedback helped me prevent progression. Highly recommend!"
+                    </p>
+                </div>
+
+                <div class="testimonial-card bg-gray-50 p-8 rounded-xl shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-glucogreen rounded-full flex items-center justify-center text-white font-bold">
+                            AM
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-glucoblue">Aisha M.</h4>
+                            <p class="text-sm text-gray-600">Obesity Management</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 mb-3">
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                        <i class="fas fa-star text-glucogreen"></i>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "Lost 15kg and regained my confidence. The doctor-led approach gave me credibility and the
+                        results speak for themselves. This is not just a fitness app!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- contact  -->
+    <section id="contact" class="bg-white py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 uppercase">
+                    <span class="text-glucoblue">Get</span>
+                    <span class="text-glucogreen">In Touch</span>
+                </h2>
+                <p class="text-gray-600 text-lg md:text-xl">
+                    Have questions or need assistance? We're here to help.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+
+                
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 uppercase text-glucoblue">Address</h4>
+                        <p class="text-gray-700">Mumbai · Delhi · Bangalore · Across India</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 uppercase text-glucoblue">Phone</h4>
+                        <p class="text-gray-700">+91 XXXXX XXXXX</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 uppercase text-glucoblue">Email</h4>
+                        <p class="text-gray-700">hello@glucocare.in</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 uppercase text-glucoblue">Follow Us</h4>
+                        <div class="flex gap-4 text-2xl text-glucogreen">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div>
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Name</label>
+                            <input type="text" placeholder="Your Name"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-glucoblue">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" placeholder="Your Email"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-glucoblue">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea placeholder="Your Message" rows="5"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-glucoblue"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="bg-glucogreen text-white font-bold px-6 py-3 rounded-full shadow hover:bg-glucogreen/90 transition duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA SECTION -->
+    <section class="py-24 fixed-bg"
+        style="background-image: url('https://wallpapers.com/images/hd/doctor-with-globe-in-hand-hd-medical-dff7ahiwc5xsfjm0.jpg');">
+
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-black mb-6 uppercase">Ready to Transform Your Health?</h2>
+
+            <a href="tel:"
+                class="bg-glucogreen text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg hover:shadow-xl transition">
+                Book Free Consultation
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <footer class="bg-glucogreen text-white py-20 px-6">
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16">
+
+            <!-- LEFT COLUMN -->
+            <div class="space-y-10">
+
+                <!-- Logo + About -->
+                <div>
+                    <!-- <img src="/static/images/logo.png" alt="GlucoCare logo" class="h-12 mb-6"> -->
+                    <p class="text-white/90 leading-relaxed">
+                        Leading India’s smart diabetes care with technology-driven solutions,
+                        continuous monitoring, and personalized health insights to improve lives.
+                    </p>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4 uppercase">Follow Us</h4>
+                    <div class="flex gap-6 text-3xl">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="grid md:grid-cols-2 gap-12">
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6 uppercase">Quick Links</h4>
+                    <ul class="space-y-3 text-white/90">
+                        <li><a href="#home" class="hover:text-white">Home</a></li>
+                        <li><a href="#about" class="hover:text-white">About Us</a></li>
+                        <li><a href="#services" class="hover:text-white">Services</a></li>
+                        <li><a href="#technology" class="hover:text-white">Technology</a></li>
+                        <li><a href="#contact" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6 uppercase">Contact</h4>
+                    <ul class="space-y-4 text-white/90">
+                        <li><i class="fas fa-phone mr-2"></i> +91 XXXXX XXXXX</li>
+                        <li><i class="fas fa-envelope mr-2"></i> hello@glucocare.in</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Mumbai · Delhi · Bangalore · India</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- COPYRIGHT & CREDIT -->
+        <div class="border-t border-white/20 mt-16 pt-6 text-center text-white/80 text-sm">
+            <p>© {% now "Y" %} GlucoCare. All Rights Reserved.</p>
+            <p class="mt-2">
+                Designed & Developed by
+                <a href="https://www.inspirezesttechnologies.com/" target="_blank"
+                    class="text-white hover:text-gray-300 font-semibold">
+                    Inspirezesttechnologies Pvt Ltd.
+                </a>
+            </p>
+        </div>
+    </footer>
+
+
+
+
+    <script>
+        // Mobile Menu Toggle with Animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.classList.remove('active');
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Close mobile menu on "Book Now" button click
+        document.querySelector('#mobile-menu button').addEventListener('click', function () {
+            mobileMenu.classList.add('hidden');
+            mobileMenuBtn.classList.remove('active');
+        });
+
+        // Desktop menu smooth scroll
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
